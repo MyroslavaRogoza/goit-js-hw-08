@@ -98,10 +98,10 @@ document.addEventListener('click', function(evt) {
     evt.preventDefault();
   });
   
-  container.addEventListener('click', onGalleryClick);
-  function onGalleryClick(evt){
-    if (evt.target === evt.currentTarget) return;
-    
+container.addEventListener('click', onGalleryClick);
+function onGalleryClick(evt){
+  if (evt.target === evt.currentTarget) return;
+      
 const instance = basicLightbox.create(`
     <img src="${evt.target.dataset.source}" width="1200">`,
 {onShow: instance =>{
