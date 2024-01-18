@@ -63,12 +63,14 @@ const images = [
       description: "Lighthouse Coast Sea",
     },
   ];
+  
 const container = document.querySelector('.gallery');
 
 function createItem({preview, original, description}){
-    return `<li>
-    <a href="${original}">
+    return `<li class="gallery-item">
+    <a class="gallery-link" href="${original}">
       <img
+        class="gallery-image"
         src="${preview}"
         alt="${description}"
         data-source="${original}"
@@ -84,28 +86,21 @@ container.insertAdjacentHTML('afterbegin', markup);
 createGallery();
 
 const liItem = document.querySelectorAll('.gallery > li');
-const link = document.querySelectorAll('.gallery > li > a');
 
-for(const item of liItem){
-    item.classList.add('gallery-item');
-} 
-for(const item of link){
-    item.classList.add('gallery-link');
-    item.firstElementChild.classList.add('gallery-image'); 
-}
-
-document.addEventListener('click', function(evt) {
+container.addEventListener('click', function(evt) {
     evt.preventDefault();
   });
-  
+
 container.addEventListener('click', onGalleryClick);
+
 function onGalleryClick(evt){
   if (evt.target === evt.currentTarget) return;
-      
+
 const instance = basicLightbox.create(`
     <img src="${evt.target.dataset.source}" width="1200">`,
-{onShow: instance =>{
- document.addEventListener('keydown', closeModal)
+{
+onShow: instance =>{
+  document.addEventListener('keydown', closeModal)
 },
 onClose: instance =>{
   document.removeEventListener('keydown', closeModal)
